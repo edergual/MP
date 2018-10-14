@@ -4,19 +4,24 @@
 #include "gtest/gtest.h"
 
 TEST(AbrirArquivo, ArquivoAbertoComSucesso) {
-	
-	EXPECT_NE(abrir_arquivo("arquivoC.c"),NULL);
+	char nome[15] = "arquivoC.c";
+	EXPECT_NE(nullptr, abrir_arquivo(nome));
 }
 
 TEST(ContaLinhas, ContaLinhasFunciona) {
-	FILE* fp = abrir_arquivo("arquivoC.c");
+	char nome[15] = "arquivoC.c";
+	FILE* fp = abrir_arquivo(nome);
 	EXPECT_EQ(contar_linhas_codigo(fp),0);
+	fclose(fp);
 }
 
 TEST(IdentificarComentarios, IdentificaComentariosFunciona) {
-	FILE* fp = abrir_arquivo("arquivoC.c");
+	char linha[121];
+	char nome[15] = "arquivoC.c";
+	FILE* fp = abrir_arquivo(nome);
 	fgets(linha,121,fp);
 	EXPECT_EQ(identificar_linha_comentario(linha,0),0);
+	fclose(fp);
 }
 
 int main(int argc, char **argv) {

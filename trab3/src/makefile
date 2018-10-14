@@ -1,7 +1,8 @@
 IDIR =../include
 CC=gcc
 CXX=g++
-CFLAGS=-fprofile-arcs -ftest-coverage -I$(IDIR)
+CFLAGS=-g -lgtest -fprofile-arcs -ftest-coverage -I$(IDIR)
+CFLAGS2=-g -fprofile-arcs -ftest-coverage -I$(IDIR)
 
 ODIR=obj
 LDIR =../lib
@@ -14,13 +15,13 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS2)
 
 $(ODIR)/%.o: %.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CFLAGS)
 
-conta_linhas_make cont_linhas: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+conta_linha_make conta_linhas: $(OBJ)
+	$(CXX) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 
