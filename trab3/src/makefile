@@ -1,7 +1,7 @@
 IDIR =../include
 CC=gcc
 CXX=g++
-CFLAGS=-g -lgtest -fprofile-arcs -ftest-coverage -I$(IDIR)
+CFLAGS=-g -Wall -Wextra -lgtest -lpthread -fprofile-arcs -ftest-coverage -I$(IDIR) -std=c++11
 CFLAGS2=-g -fprofile-arcs -ftest-coverage -I$(IDIR)
 
 ODIR=obj
@@ -15,7 +15,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
 $(ODIR)/%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS2)
+	$(CXX) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/%.o: %.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CFLAGS)
